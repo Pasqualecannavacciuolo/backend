@@ -2,7 +2,8 @@
 
 
 void handle_client(int client_fd) {
-    char buffer [1024];
+    // IMPORTANTE - assegnare un buffer sufficientemente grande per evitare effetti indesiderati (stampe caratteri non voluti es: �X�)
+    char buffer [4096];
     ssize_t bytes_received;
 
     // Leggi la richiesta HTTP dal client
