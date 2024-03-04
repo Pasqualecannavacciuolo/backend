@@ -4,6 +4,9 @@
         "unistd.h": "c",
         "stdlib.h": "c",
         "handlers.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "libreria.h": "c",
+        "libro.h": "c",
+        "responses.h": "c"
     }
 }

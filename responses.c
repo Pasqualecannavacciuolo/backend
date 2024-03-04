@@ -35,3 +35,25 @@ char* send_get_response() {
 
     return response;
 }
+
+char* format_http_response(char* jsonBody) {
+    size_t httpResponseSize = strlen("HTTP/1.1 200 OK\r\n") + strlen("Content-Type: application/json\r\n") +
+                              strlen("Content-Length: ") + strlen(jsonBody) + strlen("\r\n\r\n") + 1;
+
+    char *httpResponse = (char *)malloc(httpResponseSize);
+    if (httpResponse == NULL) {
+        return NULL; // Gestione dell'errore di allocazione di memoria
+    }
+
+    // Costruzione della risposta HTTP
+    strcpy(httpResponse, "HTTP/1.1 200 OK\r\n");
+    strcat(httpResponse, "Content-Type: application/json\r\n");
+
+    // Aggiungere la lunghezza del corpo della risposta
+    sprintf(httpResponse + strlen(httpResponse), "Content-Length: %ld\r\n", strlen(jsonBody));
+
+    strcat(httpResponse, "\r\n"); // Fine delle intestazioni, inizio del corpo della risposta
+    strcat(httpResponse, jsonBody);
+
+    return httpResponse;
+}
