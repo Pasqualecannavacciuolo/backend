@@ -27,22 +27,36 @@ void handle_client(int client_fd)
         return;
     }
 
-    if (strcmp(endpoint, "/libreria") == 0)
-    {
-        char *getLibreriaJson = get_all();
-        char *response = format_http_response(getLibreriaJson);
-        send(client_fd, response, strlen(response), 0);
-        free(getLibreriaJson);
-        free(response);
-    } else if(strcmp(endpoint, "/") == 0) {
-        char *response = send_get_response();
-        send(client_fd, response, strlen(response), 0);
-        free(response);
-    }
+    handle_request_by_endpoint(client_fd, endpoint);
 
     // Chiudi la connessione con il client
     close(client_fd);
+    
+    // Reset del buffer
+    buffer[0] = '\0';
 }
+
+
+void handle_request_by_endpoint(int client_fd, const char *endpoint) {
+    if (strcmp(endpoint, "/libreria") == 0) {
+        char *getLibreriaJson = get_all();
+        if(getLibreriaJson) {
+            char *response = format_http_response(200, getLibreriaJson);
+            send(client_fd, response, strlen(response), 0);
+            free(getLibreriaJson);
+            free(response);
+        }
+    } else if (strcmp(endpoint, "/") == 0) {
+        /*char *response = send_get_response();
+        send(client_fd, response, strlen(response), 0);
+        free(response);*/
+    } else {
+        // Gestione per endpoint sconosciuto
+        char *response = format_http_response(404, "Questo endpoint non e' stato registrato");
+        send(client_fd, response, strlen(response), 0);
+    }
+}
+
 
 void handle_int_signal(int socket_descriptor)
 {
@@ -50,6 +64,7 @@ void handle_int_signal(int socket_descriptor)
     close(socket_descriptor);
     exit(EXIT_SUCCESS);
 }
+
 
 int extract_endpoint(char *request, char *endpoint)
 {

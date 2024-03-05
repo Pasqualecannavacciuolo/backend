@@ -58,4 +58,22 @@ void handle_int_signal(int socket_descriptor);
  */
 int extract_endpoint(char *request, char *endpoint);
 
+
+/**
+ * @brief Gestisce la richiesta HTTP in base all'endpoint specificato.
+ *
+ * Questa funzione riceve l'endpoint della richiesta HTTP e gestisce la richiesta
+ * in base all'endpoint specificato. Se l'endpoint corrisponde a "/libreria", viene
+ * restituito un elenco di libri in formato JSON. Se l'endpoint è "/", viene
+ * restituita una risposta di default. Se l'endpoint non è riconosciuto, viene restituito
+ * un messaggio di errore "404 Not Found".
+ *
+ * @param client_fd Il descrittore del socket per il client che ha inviato la richiesta.
+ * @param endpoint L'endpoint della richiesta HTTP da gestire.
+ * 
+ * @return Void. La funzione invia la risposta al client utilizzando il socket fornito.
+ */
+void handle_request_by_endpoint(int client_fd, const char *endpoint);
+
+
 #endif
