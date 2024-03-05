@@ -6,8 +6,6 @@
 #ifndef RESPONSES_H
 #define RESPONSES_H
 
-// Prototipi delle funzioni
-char* send_get_response();
 
 /**
  * Formatta una risposta HTTP con il corpo JSON specificato.
@@ -15,10 +13,11 @@ char* send_get_response();
  * una risposta HTTP con intestazioni appropriate e il corpo JSON specificato.
  *
  * @param jsonBody Il corpo JSON da includere nella risposta HTTP.
+ * @param status Lo status della risposta HTTP.
  * @return Puntatore a una stringa allocata dinamicamente contenente la risposta HTTP formattata.
  *         Il chiamante è responsabile di liberare la memoria allocata.
  *         Se si verifica un errore durante l'allocazione di memoria, la funzione restituirà NULL.
  */
-char* format_http_response(char* jsonBody);
+char* format_http_response(int status, char* jsonBody);
 
 #endif
