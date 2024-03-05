@@ -33,7 +33,7 @@ char *get_all()
     libreria.lista_libri[2] = libro3;
 
     char jsonString[1024]; // Aumentato per la dimensione dell'array JSON
-    char tempStr[256]; // Aumentato per le stringhe temporanee
+    //char tempStr[256]; // Aumentato per le stringhe temporanee
 
     // Inizializzazione della stringa JSON con l'apertura dell'array
     strcpy(jsonString, "{\"lista_libri\": [");

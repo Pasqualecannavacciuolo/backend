@@ -10,7 +10,7 @@ char* libro_to_json(Libro libro) {
     strcpy(jsonString, "{");
 
     // Genero il contentuo in formato JSON
-    for (int i = 0; i < sizeof(keys) / sizeof(keys[0]); i++) {
+    for (unsigned long i = 0; i < sizeof(keys) / sizeof(keys[0]); i++) {
         if(strcmp(keys[i],"titolo") == 0) {
             sprintf(tempStr, "\"%s\": \"%s\", ", keys[i], libro.titolo);
         } else if(strcmp(keys[i],"autore") == 0) {
