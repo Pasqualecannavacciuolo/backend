@@ -34,4 +34,28 @@ void handle_client(int client_fd);
  */
 void handle_int_signal(int socket_descriptor);
 
+
+/**
+ * Estrae l'endpoint dalla richiesta HTTP.
+ *
+ * @param request La richiesta HTTP dalla quale estrarre l'endpoint.
+ * @param endpoint Puntatore alla stringa in cui memorizzare l'endpoint estratto.
+ * @return 0 se l'endpoint è stato estratto con successo, -1 in caso di errore nei parametri o nel parsing.
+ *
+ * La funzione estrae l'endpoint dalla prima riga della richiesta HTTP. L'endpoint estratto
+ * viene copiato nella stringa 'endpoint'.
+ *
+ * Esempio di utilizzo:
+ *   char request[4096];
+ *   char endpoint[256];
+ *   // Inizializza 'request' con la richiesta HTTP ricevuta
+ *   // ...
+ *   if (extract_endpoint(request, endpoint) == 0) {
+ *       printf("Endpoint richiesto: %s\n", endpoint);
+ *   } else {
+ *       printf("Errore nell'estrazione dell'endpoint.\n");
+ *   }
+ */
+int extract_endpoint(char *request, char *endpoint);
+
 #endif
