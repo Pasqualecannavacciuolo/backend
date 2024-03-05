@@ -32,8 +32,7 @@ char *get_all()
     libro3.isbn[sizeof(libro3.isbn) - 1] = '\0';
     libreria.lista_libri[2] = libro3;
 
-    char jsonString[1024]; // Aumentato per la dimensione dell'array JSON
-    //char tempStr[256]; // Aumentato per le stringhe temporanee
+    char jsonString[4096]; // Aumentato per la dimensione dell'array JSON
 
     // Inizializzazione della stringa JSON con l'apertura dell'array
     strcpy(jsonString, "{\"lista_libri\": [");
@@ -44,8 +43,6 @@ char *get_all()
         if (i > 0)
             strcat(jsonString, ", "); // Aggiungi virgola tra gli elementi dell'array
         char* libro_json = libro_to_json(libreria.lista_libri[i]);
-        /*sprintf(tempStr, "{\"titolo\": \"%s\", \"autore\": \"%s\", \"isbn\": \"%s\"}",
-                libreria.lista_libri[i].titolo, libreria.lista_libri[i].autore, libreria.lista_libri[i].isbn);*/
         strcat(jsonString, libro_json);
     }
 
