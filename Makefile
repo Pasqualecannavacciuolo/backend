@@ -9,7 +9,7 @@ TARGET = server
 OBJ_DIR = output
 
 # File sorgente
-SRCS = $(wildcard *.c) $(wildcard endpoints/*.c) $(wildcard formatters/*.c)
+SRCS = $(wildcard *.c) $(wildcard endpoints/*.c) $(wildcard formatters/*.c) $(wildcard log/*.c)
 
 # File oggetto generati dalla compilazione
 OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))

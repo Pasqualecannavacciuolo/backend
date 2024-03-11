@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <string.h>
 
+#define MAX_RESPONSE_SIZE 8192 // Dimensione massima consentita per la risposta HTTP
+
 #ifndef RESPONSES_H
 #define RESPONSES_H
 

@@ -13,6 +13,11 @@
 #include "responses.h"
 #include "formatters/libro.h"
 #include "endpoints/libreria.h"
+#include "formatters/prestito.h"
+#include "endpoints/prestiti.h"
+#include "formatters/utente.h"
+#include "endpoints/utenti.h"
+#include "log/logging.h"
 
 // Prototipi delle funzioni
 

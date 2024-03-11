@@ -1,0 +1,53 @@
+{
+    "libri": [
+        {
+            "id": "1234567891236",
+            "titolo": "Geronimo Stilton",
+            "autore": "John Doe",
+            "copie_disponibili": 15,
+            "prestiti": []
+        },
+        {
+            "id": "9876543219875",
+            "titolo": "1984",
+            "autore": "George Orwell",
+            "copie_disponibili": 1,
+            "prestiti": [
+                {
+                    "id_utente": 1,
+                    "data_inizio": "2024-03-11",
+                    "data_scadenza": "2024-04-11"
+                }
+            ]
+        },
+        {
+            "id": "1535644678921",
+            "titolo": "La Nebbia",
+            "autore": "Salvador Dali",
+            "copie_disponibili": 7,
+            "prestiti": []
+        }
+    ],
+    "utenti": [
+        {
+            "id": 1,
+            "nome": "Pasquale",
+            "cognome": "Cannavacciuolo",
+            "prestiti": [
+                {
+                    "id_libro": "9876543219875",
+                    "data_inizio": "2024-03-11",
+                    "data_scadenza": "2024-04-11"
+                }
+            ]
+        }
+    ],
+    "prestiti": [
+        {
+            "id_utente": 1,
+            "id_libro": "9876543219875",
+            "data_inizio": "2024-03-11",
+            "data_scadenza": "2024-04-11"
+        }
+    ]
+}

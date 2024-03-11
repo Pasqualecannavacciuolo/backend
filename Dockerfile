@@ -11,11 +11,12 @@ COPY handlers.c handlers.h /usr/src/server/
 COPY responses.c responses.h /usr/src/server/
 COPY endpoints/libreria.c endpoints/libreria.h /usr/src/server/endpoints/
 COPY formatters/libro.c formatters/libro.h /usr/src/server/formatters/
+COPY log/logging.c log/logging.h /usr/src/server/log/
 
 # Compila il codice sorgente
 WORKDIR /usr/src/server/
 #RUN mkdir -p output output/endpoints output/formatters
-RUN gcc -o server server.c handlers.c responses.c endpoints/libreria.c formatters/libro.c
+RUN gcc -o server server.c handlers.c responses.c endpoints/libreria.c formatters/libro.c log/logging.c -lsocket
 
 # Apri le porte necessarie
 EXPOSE 5193

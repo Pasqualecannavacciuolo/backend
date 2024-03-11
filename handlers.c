@@ -7,13 +7,16 @@ void handle_client(int client_fd)
     ssize_t bytes_received;
 
     // Leggi la richiesta HTTP dal client
-    bytes_received = recv(client_fd, buffer, sizeof(buffer), 0);
-    if (bytes_received < 0)
-    {
-        fprintf(stderr, "Errore nella lettura della richiesta HTTP\n");
+    bytes_received = recv(client_fd, buffer, sizeof(buffer) - 1, 0);
+
+    if (bytes_received < 0) {
+        perror("Errore durante la lettura della richiesta HTTP");
         close(client_fd);
         return;
     }
+
+    // Aggiungi il terminatore di stringa al buffer
+    buffer[bytes_received] = '\0';
 
     // Stampa la richiesta HTTP ricevuta dal client
     printf("Richiesta HTTP ricevuta:\n%s", buffer);
@@ -30,33 +33,33 @@ void handle_client(int client_fd)
     handle_request_by_endpoint(client_fd, endpoint);
 
     // Chiudi la connessione con il client
-    close(client_fd);
-    
-    // Reset del buffer
-    buffer[0] = '\0';
+    //close(client_fd);
 }
 
-
-void handle_request_by_endpoint(int client_fd, const char *endpoint) {
-    if (strcmp(endpoint, "/libreria") == 0) {
-        char *getLibreriaJson = get_all();
-        if(getLibreriaJson) {
-            char *response = format_http_response(200, getLibreriaJson);
-            send(client_fd, response, strlen(response), 0);
-            free(getLibreriaJson);
-            free(response);
-        }
-    } else if (strcmp(endpoint, "/") == 0) {
-        /*char *response = send_get_response();
-        send(client_fd, response, strlen(response), 0);
-        free(response);*/
-    } else {
+void handle_request_by_endpoint(int client_fd, const char *endpoint)
+{
+    if (strcmp(endpoint, "/libreria") == 0)
+    {
+        get_all_libri(client_fd);
+    }
+    else if (strcmp(endpoint, "/prestiti") == 0)
+    {
+        get_all_prestiti(client_fd);
+    }
+    else if (strcmp(endpoint, "/utenti") == 0)
+    {
+        get_all_utenti(client_fd);
+    }
+    else
+    {
         // Gestione per endpoint sconosciuto
         char *response = format_http_response(404, "Questo endpoint non e' stato registrato");
         send(client_fd, response, strlen(response), 0);
+        log_to_success("GET", endpoint, "404");
+        free(response);
     }
+    //close(client_fd);
 }
-
 
 void handle_int_signal(int socket_descriptor)
 {
@@ -64,7 +67,6 @@ void handle_int_signal(int socket_descriptor)
     close(socket_descriptor);
     exit(EXIT_SUCCESS);
 }
-
 
 int extract_endpoint(char *request, char *endpoint)
 {
@@ -88,8 +90,15 @@ int extract_endpoint(char *request, char *endpoint)
         return -1; // Errore nel parsing della riga della richiesta
     }
 
+    // Validazione dell'endpoint per prevenire buffer overflow
+    size_t path_length = strlen(path);
+    if (path_length >= 256)
+    {
+        return -1; // Errore: lunghezza dell'endpoint troppo lunga
+    }
+
     // Copia l'endpoint estratto nella stringa 'endpoint'
-    strncpy(endpoint, path, strlen(path));
+    strncpy(endpoint, path, path_length);
     endpoint[strlen(path)] = '\0'; // Assicura che la stringa sia terminata correttamente
 
     return 0; // Parsing della richiesta HTTP completato con successo

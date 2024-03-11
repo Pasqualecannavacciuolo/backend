@@ -1,0 +1,3 @@
+[GET] - 200 - /prestiti
+[GET] - 200 - /utenti
+[GET] - 200 - /libreria

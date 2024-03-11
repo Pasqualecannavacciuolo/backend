@@ -14,7 +14,7 @@ typedef struct
 } Libro;
 
 // Array di stringhe per i nomi delle chiavi
-extern const char *keys[];
+extern const char *libro_keys[];
 
 /**
  * Genera una rappresentazione JSON di un libro.

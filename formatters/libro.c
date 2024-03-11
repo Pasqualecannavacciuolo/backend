@@ -1,22 +1,22 @@
 #include "libro.h"
-// Definizione della variabile keys
-const char *keys[] = {"titolo", "autore", "isbn"};
+// Definizione della variabile libro_keys
+const char *libro_keys[] = {"titolo", "autore", "isbn"};
 
 char* libro_to_json(Libro libro) {
-    char jsonString[512];
-    char tempStr[100];
+    char jsonString[2048];
+    char tempStr[512];
 
     // Inizializzazione della stringa JSON
     strcpy(jsonString, "{");
 
     // Genero il contentuo in formato JSON
-    for (unsigned long i = 0; i < sizeof(keys) / sizeof(keys[0]); i++) {
-        if(strcmp(keys[i],"titolo") == 0) {
-            sprintf(tempStr, "\"%s\": \"%s\", ", keys[i], libro.titolo);
-        } else if(strcmp(keys[i],"autore") == 0) {
-            sprintf(tempStr, "\"%s\": \"%s\", ", keys[i], libro.autore);
-        } else if(strcmp(keys[i],"isbn") == 0) {
-            sprintf(tempStr, "\"%s\": \"%s\", ", keys[i], libro.isbn);
+    for (unsigned long i = 0; i < sizeof(libro_keys) / sizeof(libro_keys[0]); i++) {
+        if(strcmp(libro_keys[i],"titolo") == 0) {
+            sprintf(tempStr, "\"%s\": \"%s\", ", libro_keys[i], libro.titolo);
+        } else if(strcmp(libro_keys[i],"autore") == 0) {
+            sprintf(tempStr, "\"%s\": \"%s\", ", libro_keys[i], libro.autore);
+        } else if(strcmp(libro_keys[i],"isbn") == 0) {
+            sprintf(tempStr, "\"%s\": \"%s\", ", libro_keys[i], libro.isbn);
         }
         strcat(jsonString, tempStr);
     }

@@ -10,16 +10,16 @@
 #define JSON_SERVER_IP "192.168.1.53"
 #define JSON_SERVER_PORT 5555
 
-#ifndef LIBRERIA_H
-#define LIBRERIA_H
+#ifndef UTENTI_H
+#define UTENTI_H
 
 
 /**
- * @brief Ottiene tutti i dati dalla risorsa "libri" sul server JSON remoto
+ * @brief Ottiene tutti i dati dalla risorsa "utenti" sul server JSON remoto
  *        e li invia al client che ha fatto la richiesta al web server.
  * 
  * @param client_socket Il socket associato alla connessione con il client che ha fatto la richiesta al web server.
  */
-void get_all_libri(int client_socket);
+void get_all_utenti(int client_socket);
 
 #endif

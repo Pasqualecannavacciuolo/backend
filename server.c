@@ -1,10 +1,5 @@
 #include "server.h"
 
-#define PROTOCOL_PORT 5193
-#define QUEUE_LEN 6
-
-int socket_descriptor;
-
 int main()
 {
     // Serve per terminare in modo corretto il server premendo CTRL+C
@@ -19,10 +14,11 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    struct sockaddr_in server_address;
+    
     server_address.sin_family = AF_INET;
     server_address.sin_addr.s_addr = 0;
     server_address.sin_port = htons((u_short)PROTOCOL_PORT);
+    memset(&(server_address.sin_zero), '\0', 8);
 
     // Binding dell'indirizzo locale al socket
     if (bind(socket_descriptor, (struct sockaddr *)&server_address, sizeof(server_address)) < 0)
@@ -41,17 +37,37 @@ int main()
 
     while (1)
     {
-        struct sockaddr_in client_address;
-        socklen_t client_address_len = sizeof(client_address);
-        int client_fd = accept(socket_descriptor, (struct sockaddr *)&client_address, &client_address_len);;
+        int client_fd = accept(socket_descriptor, (struct sockaddr *)&client_address, &client_address_len);
         if (client_fd < 0)
         {
             fprintf(stderr, "Errore nella fase di accetazione!\n");
             continue;
         }
-        // Gestisci la richiesta del client
-        handle_client(client_fd);
+        
+        // Creazione di un processo figlio
+        pid_t pid = fork();
+        if (pid < 0)
+        {
+            // Errore nella creazione del processo figlio
+            fprintf(stderr, "Errore nella creazione del processo figlio!\n");
+            close(client_fd);
+            exit(EXIT_FAILURE);
+        }
+        else if (pid == 0)
+        {
+            // Processo figlio
+            close(socket_descriptor); // Il processo figlio non ha bisogno di ascoltare sulla porta principale
+            // Gestisci la richiesta del client
+            handle_client(client_fd);
+            exit(EXIT_SUCCESS);
+        }
+        else
+        {
+            // Processo padre
+            close(client_fd); // Il processo padre non ha bisogno del socket del client
+        }
     }
     close(socket_descriptor);
+    wait(NULL);
     return 0;
 }

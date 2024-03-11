@@ -7,6 +7,17 @@
         "stdio.h": "c",
         "libreria.h": "c",
         "libro.h": "c",
-        "responses.h": "c"
-    }
+        "responses.h": "c",
+        "in.h": "c",
+        "logging.h": "c",
+        "inet.h": "c",
+        "socket.h": "c"
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/Users/pasqualecannavacciuolo/Documents/Università/TERZO ANNO/PRIMO SEMESTRE/LABORATORIO DI SISTEMI OPERATIVI/Progetto/backend",
+            "binaryPath": "/Users/pasqualecannavacciuolo/Documents/Università/TERZO ANNO/PRIMO SEMESTRE/LABORATORIO DI SISTEMI OPERATIVI/Progetto/backend/server",
+            "binaryArgs": []
+        }
+    ]
 }
