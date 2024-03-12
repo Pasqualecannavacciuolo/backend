@@ -30,15 +30,6 @@
  */
 void handle_client(int client_fd);
 
-/**
- * Gestisce il segnale SIGINT ricevuto per la terminazione del server.
- * La funzione stampa un messaggio di avviso, chiude il descrittore del socket
- * specificato e termina il server con lo stato di uscita EXIT_SUCCESS.
- *
- * @param socket_descriptor Il descrittore del socket da chiudere prima di terminare il server.
- */
-void handle_int_signal(int socket_descriptor);
-
 
 /**
  * Estrae l'endpoint dalla richiesta HTTP.

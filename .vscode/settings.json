@@ -11,7 +11,10 @@
         "in.h": "c",
         "logging.h": "c",
         "inet.h": "c",
-        "socket.h": "c"
+        "socket.h": "c",
+        "wait.h": "c",
+        "prestito.h": "c",
+        "prestiti.h": "c"
     },
     "makefile.launchConfigurations": [
         {

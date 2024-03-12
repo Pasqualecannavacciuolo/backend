@@ -61,12 +61,12 @@ void handle_request_by_endpoint(int client_fd, const char *endpoint)
     //close(client_fd);
 }
 
-void handle_int_signal(int socket_descriptor)
+/*void handle_int_signal(int socket_descriptor)
 {
     printf("\nRicevuto segnale SIGINT. Terminazione del server...\n");
     close(socket_descriptor);
     exit(EXIT_SUCCESS);
-}
+}*/
 
 int extract_endpoint(char *request, char *endpoint)
 {
