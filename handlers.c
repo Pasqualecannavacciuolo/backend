@@ -33,7 +33,7 @@ void handle_client(int client_fd)
     handle_request_by_endpoint(client_fd, endpoint);
 
     // Chiudi la connessione con il client
-    //close(client_fd);
+    close(client_fd);
 }
 
 void handle_request_by_endpoint(int client_fd, const char *endpoint)
@@ -50,12 +50,32 @@ void handle_request_by_endpoint(int client_fd, const char *endpoint)
     {
         get_all_utenti(client_fd);
     }
+    else if (strncmp(endpoint, "/utenti/", 8) == 0)
+    {
+        // Se l'endpoint inizia con "/utente/", significa che è richiesto un utente specifico
+        // Estrai l'ID dell'utente dall'endpoint
+        int id = atoi(endpoint + 8); // Ignora i primi 8 caratteri che rappresentano "/utente/"
+        
+        // Verifica se l'ID estratto è valido (maggiore di 0)
+        if (id > 0)
+        {
+            get_utente_by_id(client_fd, id);
+        }
+        else
+        {
+            // Se l'ID non è valido, restituisci un errore 400 Bad Request
+            char *response = format_http_response(400, "ID utente non valido");
+            send(client_fd, response, strlen(response), 0);
+            log_to_error("GET", (char *)endpoint, "400", "ID utente non valido");
+            free(response);
+        }
+    }
     else
     {
         // Gestione per endpoint sconosciuto
         char *response = format_http_response(404, "Questo endpoint non e' stato registrato");
         send(client_fd, response, strlen(response), 0);
-        log_to_success("GET", endpoint, "404");
+        log_to_error("GET", (char *)endpoint, "404", "Questo endpoint non e' stato registrato");
         free(response);
     }
     //close(client_fd);
