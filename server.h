@@ -28,8 +28,6 @@ socklen_t client_len = sizeof(client_addr);
 pid_t children[MAX_CHILDREN] = {0};
 int num_children = 0;
 
-int child_fds[MAX_CHILDREN];
-
 /**
  * Gestisce il segnale SIGINT ricevuto per la terminazione del server.
  * La funzione stampa un messaggio di avviso, chiude il descrittore del socket
@@ -37,6 +35,6 @@ int child_fds[MAX_CHILDREN];
  *
  * @param socket_descriptor Il descrittore del socket da chiudere prima di terminare il server.
  */
-void handle_int_signal(int signum, int socket_descriptor);
+void handle_int_signal(int socket_descriptor);
 
 #endif

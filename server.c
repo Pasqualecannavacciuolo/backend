@@ -36,54 +36,42 @@ int main()
 
     printf("Server in ascolto sulla porta %d...\n", PROTOCOL_PORT);
 
-    while (1)
-    {
-        // Verifica se il numero attuale di processi figli è inferiore al massimo consentito
-        if (num_children < MAX_CHILDREN)
-        {
-            // Accept incoming connection
-            if ((client_fd = accept(socket_descriptor, (struct sockaddr *)&client_addr, &client_len)) == -1)
-            {
-                perror("Accepting connection failed");
-                exit(EXIT_FAILURE);
-            }
-
-
-            // Fork a new process to handle the client
-            if ((pid = fork()) == -1)
-            {
-                perror("Fork failed");
-                exit(EXIT_FAILURE);
-            }
-            else if (pid == 0)
-            {
-                // Child process
-                close(socket_descriptor);
-                handle_client(client_fd);
-                exit(EXIT_SUCCESS);
-            }
-            else
-            {
-                // Parent process
-                close(client_fd);
-                // Incrementa il numero di processi figli attivi
-                num_children++;
-            }
-        }
-        else
-        {
-            // Attendi che uno dei processi figli termini prima di accettare nuove connessioni
+    while (1) {
+        // Attendi che uno dei processi figli termini prima di accettare nuove connessioni
+        while (num_children >= MAX_CHILDREN) {
             wait(NULL);
-            // Decrementa il numero di processi figli attivi
             num_children--;
+        }
+
+        // Accept incoming connection
+        if ((client_fd = accept(socket_descriptor, (struct sockaddr *)&client_addr, &client_len)) == -1) {
+            perror("Accepting connection failed");
+            exit(EXIT_FAILURE);
+        }
+
+        // Fork a new process to handle the client
+        if ((pid = fork()) == -1) {
+            perror("Fork failed");
+            exit(EXIT_FAILURE);
+        }
+        else if (pid == 0) {
+            // Child process
+            handle_client(client_fd);
+            close(socket_descriptor);
+            exit(EXIT_SUCCESS);
+        }
+        else {
+            // Parent process
+            close(client_fd);
+            // Incrementa il numero di processi figli attivi
+            num_children++;
         }
     }
     close(socket_descriptor);
-    wait(NULL);
     return 0;
 }
 
-void handle_int_signal(int signum, int socket_descriptor) {
+void handle_int_signal(int socket_descriptor) {
     // Invia un segnale di terminazione a tutti i processi figli
     for (int i = 0; i < MAX_CHILDREN; i++) {
         printf("\nPid->[%d] - Ricevuto segnale SIGINT. Terminazione del server...\n", getpid());

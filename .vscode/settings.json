@@ -14,7 +14,9 @@
         "socket.h": "c",
         "wait.h": "c",
         "prestito.h": "c",
-        "prestiti.h": "c"
+        "prestiti.h": "c",
+        "errno.h": "c",
+        "utenti.h": "c"
     },
     "makefile.launchConfigurations": [
         {

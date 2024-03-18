@@ -60,6 +60,6 @@ void get_all_libri(int client_socket) {
 
     // Close sockets
     close(json_socket);
-    close(client_socket);
+    //close(client_socket);
 }
 
