@@ -18,8 +18,22 @@ typedef struct
     Prestito prestiti[MAX_PRESTITI];
 } Utente;
 
+// Struttura dati per rappresentare un utente
+typedef struct {
+    int id;
+    char nome[100];
+    char cognome[100];
+    char nome_utente[100];
+    char data_nascita[11]; // "YYYY-MM-DD"
+    char codice_fiscale[17];
+    char email[100];
+    char password[100];
+    char tipo_utente[20]; // "Studente" o "Libraio"
+} Register;
+
 // Array di stringhe per i nomi delle chiavi
 extern const char *utente_keys[];
+extern const char *register_utente_keys[];
 
 /**
  * Genera una rappresentazione JSON di un utente.

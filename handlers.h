@@ -9,16 +9,18 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <signal.h>
+#include <ctype.h>
 
 #include "responses.h"
+#include "log/logging.h"
+
 #include "formatters/libro.h"
 #include "endpoints/libreria.h"
 #include "formatters/prestito.h"
 #include "endpoints/prestiti.h"
 #include "formatters/utente.h"
 #include "endpoints/utenti.h"
-#include "log/logging.h"
-
+#include "endpoints/register.h"
 // Prototipi delle funzioni
 
 /**
@@ -55,6 +57,12 @@ void handle_client(int client_fd);
 int extract_endpoint(char *request, char *endpoint);
 
 
+int extract_method(char *request, char *method);
+
+
+void remove_non_alpha(char *str);
+
+
 /**
  * @brief Gestisce la richiesta HTTP in base all'endpoint specificato.
  *
@@ -69,7 +77,7 @@ int extract_endpoint(char *request, char *endpoint);
  * 
  * @return Void. La funzione invia la risposta al client utilizzando il socket fornito.
  */
-void handle_request_by_endpoint(int client_fd, const char *endpoint);
+void handle_request_by_endpoint(int client_fd, const char *request, const char *method, const char *body);
 
 
 #endif

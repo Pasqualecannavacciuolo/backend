@@ -16,7 +16,8 @@
         "prestito.h": "c",
         "prestiti.h": "c",
         "errno.h": "c",
-        "utenti.h": "c"
+        "utenti.h": "c",
+        "register.h": "c"
     },
     "makefile.launchConfigurations": [
         {
