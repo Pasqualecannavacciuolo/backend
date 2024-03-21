@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Creazione cartella di output
-mkdir -p output output/endpoints output/formatters output/log
+mkdir -p output output/endpoints output/log output/connection
 
 # Compila con Makefile
 make

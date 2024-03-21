@@ -2,24 +2,9 @@
 
 void register_user(int client_socket, const char *json_body) {
     // Connect to JSON server
-    int json_socket = socket(AF_INET, SOCK_STREAM, 0);
+    int json_socket = connect_to_json_server();
     if (json_socket < 0) {
-        perror("Errore nella creazione del socket");
-        return; 
-    }
-
-    struct sockaddr_in json_server_addr;
-    json_server_addr.sin_family = AF_INET;
-    json_server_addr.sin_port = htons(JSON_SERVER_PORT);
-    if (inet_pton(AF_INET, JSON_SERVER_IP, &json_server_addr.sin_addr) <= 0) {
-        perror("Indirizzo errato / non supportato");
-        close(json_socket);
-        return;
-    }
-
-    if (connect(json_socket, (struct sockaddr *)&json_server_addr, sizeof(json_server_addr)) < 0) {
-        perror("Connessione al server fallita");
-        close(json_socket);
+        perror("Errore nella connessione al server JSON");
         return;
     }
 

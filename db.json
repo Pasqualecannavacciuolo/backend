@@ -62,6 +62,17 @@
       "email": "mario.rossi@example.com",
       "password": "password123",
       "tipo_utente": "Studente"
+    },
+    {
+      "id": "604d",
+      "nome": "Mario",
+      "cognome": "Rossi",
+      "nome_utente": "mario.rossi",
+      "data_nascita": "1990-01-01",
+      "codice_fiscale": "RSSMRA90A01H501G",
+      "email": "mario.rossi@example.com",
+      "password": "password123",
+      "tipo_utente": "Studente"
     }
   ],
   "prestiti": [

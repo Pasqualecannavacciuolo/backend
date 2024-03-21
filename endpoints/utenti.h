@@ -5,10 +5,8 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
+#include "../connection/json_connection_manager.h"
 #include "../log/logging.h"
-
-#define JSON_SERVER_IP "192.168.1.53"
-#define JSON_SERVER_PORT 5555
 
 #ifndef UTENTI_H
 #define UTENTI_H

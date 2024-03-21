@@ -8,7 +8,11 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 
-int connect_to_json_server(const char *json_server_ip, int json_server_port);
+#define JSON_SERVER_IP "192.168.1.53"
+#define JSON_SERVER_PORT 5555
+
+int connect_to_json_server();
 
 #endif

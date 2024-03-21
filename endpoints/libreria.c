@@ -4,29 +4,9 @@
 void get_all_libri(int client_socket) {
     char buffer[4096] = {0};
 
-    // Connect to JSON server
-    int json_socket = socket(AF_INET, SOCK_STREAM, 0);
+    int json_socket = connect_to_json_server();
     if (json_socket < 0) {
-        log_to_error("GET", "/libreria", "500", "Errore nella creazione del socket");
-        perror("Errore nella creazione del socket");
-        return; 
-    }
-
-    struct sockaddr_in json_server_addr;
-    json_server_addr.sin_family = AF_INET;
-    json_server_addr.sin_port = htons(JSON_SERVER_PORT);
-    // Con inet_pton converto l'indirizzo nella rappresentazione binaria corretta
-    if (inet_pton(AF_INET, JSON_SERVER_IP, &json_server_addr.sin_addr) <= 0) {
-        log_to_error("GET", "/libreria", "502", "Indirizzo errato / non supportato");
-        perror("Indirizzo errato / non supportato");
-        close(json_socket);
-        return;
-    }
-
-    if (connect(json_socket, (struct sockaddr *)&json_server_addr, sizeof(json_server_addr)) < 0) {
-        log_to_error("GET", "/libreria", "503", "Connessione al server fallita");
-        perror("Connessione al server fallita");
-        close(json_socket);
+        perror("Errore nella connessione al server JSON");
         return;
     }
 
@@ -60,6 +40,5 @@ void get_all_libri(int client_socket) {
 
     // Close sockets
     close(json_socket);
-    //close(client_socket);
 }
 

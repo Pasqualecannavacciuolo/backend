@@ -109,7 +109,6 @@ void handle_request_by_endpoint(int client_fd, const char *endpoint, const char 
         // Gestione degli endpoint per il metodo GET
         if (strcmp(endpoint, "/libreria") == 0)
         {
-            printf("get_all_libri\n");
             get_all_libri(client_fd);
         }
         else if (strcmp(endpoint, "/prestiti") == 0)
