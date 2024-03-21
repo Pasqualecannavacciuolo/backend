@@ -17,7 +17,8 @@
         "prestiti.h": "c",
         "errno.h": "c",
         "utenti.h": "c",
-        "register.h": "c"
+        "register.h": "c",
+        "json_connection_manager.h": "c"
     },
     "makefile.launchConfigurations": [
         {
