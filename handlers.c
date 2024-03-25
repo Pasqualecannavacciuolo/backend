@@ -95,6 +95,7 @@ void handle_request_by_endpoint(int client_fd, const char *endpoint, const char 
         else
         {
             // Altri endpoint non supportati per il metodo POST
+            log_to_error("POST", (char *) endpoint, "404", "Endpoint non supportato per il metodo POST");
             char *response = format_http_response(404, "Endpoint non supportato per il metodo POST");
             send(client_fd, response, strlen(response), 0);
             free(response);

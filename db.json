@@ -42,29 +42,7 @@
       ]
     },
     {
-      "id": "83c9",
-      "nome": "Mario",
-      "cognome": "Rossi",
-      "nome_utente": "mario.rossi",
-      "data_nascita": "1990-01-01",
-      "codice_fiscale": "RSSMRA90A01H501G",
-      "email": "mario.rossi@example.com",
-      "password": "password123",
-      "tipo_utente": "Studente"
-    },
-    {
-      "id": "c397",
-      "nome": "Mario",
-      "cognome": "Rossi",
-      "nome_utente": "mario.rossi",
-      "data_nascita": "1990-01-01",
-      "codice_fiscale": "RSSMRA90A01H501G",
-      "email": "mario.rossi@example.com",
-      "password": "password123",
-      "tipo_utente": "Studente"
-    },
-    {
-      "id": "604d",
+      "id": "9ec1",
       "nome": "Mario",
       "cognome": "Rossi",
       "nome_utente": "mario.rossi",
